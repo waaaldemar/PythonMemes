@@ -114,12 +114,6 @@ def main():
 
         usedTextCheck.close()
 
-    # write used text to txt
-    usedtextSelection = open("used_text.txt", "w")
-    usedtextSelection.write(textSelectionFixed)
-    usedtextSelection.write("\n")
-    usedtextSelection.close()
-
     # check used images from txt file
     usedImagesCheck = open("used_img.txt", "r")
     usedImagesString = usedImagesCheck.read()
@@ -145,12 +139,6 @@ def main():
             # print(picSelection)
             openPicCmd = ("gpicview img/"+picSelection)
             os.system(openPicCmd)
-
-            # write the img name to file so you dont use it again
-            usedImages = open("used_img.txt", "a")
-            usedImages.write(picSelection)
-            usedImages.write("\n")
-            usedImages.close()
             
     tweetMeme = True
     while tweetMeme is True:
@@ -181,6 +169,17 @@ def main():
     photo = open(TweetPhoto,"rb")
     
     twitter.update_status_with_media(media=photo,status=textSelectionFixed)
+    
+    # write used text to txt
+    usedtextSelection = open("used_text.txt", "w")
+    usedtextSelection.write(textSelectionFixed)
+    usedtextSelection.write("\n")
+    usedtextSelection.close()
 
+    # write the img name to file so you dont use it again
+    usedImages = open("used_img.txt", "a")
+    usedImages.write(picSelection)
+    usedImages.write("\n")
+    usedImages.close()
 
 main()
